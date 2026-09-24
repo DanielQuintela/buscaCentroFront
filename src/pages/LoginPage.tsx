@@ -58,19 +58,15 @@ export function LoginPage() {
 
   return (
     <div className="relative min-h-screen w-full flex flex-col items-center justify-center bg-[#f2e9d9] p-4 sm:p-6 overflow-x-hidden select-none">
-      
-      {/* Luzes orgânicas de fundo */}
-      <div className="absolute -top-32 -left-32 w-80 h-80 bg-[#b45309]/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-32 -right-32 w-80 h-80 bg-[#51433a]/10 rounded-full blur-3xl pointer-events-none" />
 
       {/* Card Principal */}
-      <div className="relative z-10 w-full max-w-sm sm:max-w-md bg-[#f2e9d9]/85 backdrop-blur-xl p-7 sm:p-8 rounded-[32px] shadow-2xl shadow-[#51433a]/15 border border-white/60">
+      <div className="relative z-10 w-full max-w-sm sm:max-w-md bg-[#f2e9d9]/85 backdrop-blur-xl p-7 sm:p-8 rounded-4xl shadow-2xl shadow-[#51433a]/15 border border-white/60">
         
         {/* Cabeçalho de Boas-vindas */}
         <div className="mb-6">
-          <h2 className="text-3xl sm:text-3xl font-extrabold text-[#51433a] leading-tight">
+          <span className="text-3xl sm:text-3xl font-extrabold text-[#51433a] leading-tight">
             Fico feliz em vê-lo novamente! 😊👋
-          </h2>
+          </span>
           <p className="text-[#51433a]/70 mt-1.5 text-sm font-medium">
             Faça login para salvar seus lugares favoritos.
           </p>

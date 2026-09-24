@@ -4,10 +4,13 @@ import { DashboardPage } from '../pages/dashBoardPage'
 import { ProtectedRoute } from './protectedRoutes'
 // import { AdminRoute } from './AdminRoutes'
 import { ProfilePage } from '../pages/profilePage'
+import { useThemeSystem } from '../hooks/ThemeSistem'
 
 
 
 export function AppRoutes() {
+    useThemeSystem()
+    
   return (
     <BrowserRouter>
       <Routes>

@@ -33,6 +33,12 @@ export function AuthProvider({children}: {children: React.ReactNode}) {
     setUser(userResponse.data)
   }
 
+  async function signUp(data: { name: string, email: string, password: string }) {
+    const response = await api.post<AuthResponse>(
+      '/auth/register',
+      data
+    )
+
   function logout() {
     localStorage.removeItem('@token')
 

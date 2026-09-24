@@ -1,9 +1,25 @@
+/* 1. Importa as fontes do Google Fonts ANTES de tudo */
+@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap');
+
+/* 2. Importa o Tailwind v4 */
 @import "tailwindcss";
 
-/* Permite usar as variantes dark:* baseadas na classe .dark */
+/* 3. Injeta a fonte Geist no tema do Tailwind */
+@theme {
+  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
+}
+
+/* 4. Permite usar as variantes dark:* baseadas na classe .dark */
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* 5. Todas as variáveis agrupadas */
 :root {
+  /* Cores base (Formulário/Fundo) */
+  --background: #f2e9d9;
+  --foreground: #51433a;
+
+  /* Cores de Tema Original */
   --text: #6b6375;
   --text-h: #08060d;
   --bg: #fff;
@@ -16,24 +32,9 @@
   --shadow:
     rgba(0, 0, 0, 0.1) 0 10px 15px -3px,
     rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
-
-  --sans: system-ui, "Segoe UI", Roboto, sans-serif;
-  --heading: system-ui, "Segoe UI", Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
-
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-
-  color: var(--text);
-  background: var(--bg);
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Tema escuro controlado pela classe .dark */
+/* Tema escuro */
 .dark {
   --text: #9ca3af;
   --text-h: #f3f4f6;
@@ -49,28 +50,32 @@
     rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
 }
 
-@media (max-width: 1024px) {
-  :root {
-    font-size: 16px;
-  }
-}
-
+/* 6. Configurações Globais HTML/Body */
 #root {
   min-height: 100vh;
 }
 
 body {
   margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  transition:
-    background-color .2s ease,
-    color .2s ease;
+  background-color: var(--background); /* Aplica a cor f2e9d9 */
+  color: var(--foreground);
+  font-family: var(--font-sans); /* Aplica a Geist via variável do Tailwind */
+  font-size: 18px;
+  line-height: 145%;
+  letter-spacing: 0.18px;
+  
+  /* Renderização de fonte aprimorada */
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+  transition: background-color .2s ease, color .2s ease;
 }
 
-h1,
-h2 {
-  font-family: var(--heading);
+/* 7. Estilos de Tipografia Base */
+h1, h2 {
+  font-family: var(--font-sans);
   font-weight: 500;
   color: var(--text-h);
 }
@@ -88,24 +93,14 @@ h2 {
   margin: 0 0 8px;
 }
 
-@media (max-width: 1024px) {
-  h1 {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-
-  h2 {
-    font-size: 20px;
-  }
-}
-
 p {
   margin: 0;
 }
 
+/* Elementos de Código usando Geist Mono */
 code,
 .counter {
-  font-family: var(--mono);
+  font-family: var(--font-mono);
   display: inline-flex;
   border-radius: 4px;
   color: var(--text-h);
@@ -116,6 +111,20 @@ code {
   line-height: 135%;
   padding: 4px 8px;
   background: var(--code-bg);
+}
+
+/* Responsividade Global */
+@media (max-width: 1024px) {
+  :root {
+    font-size: 16px;
+  }
+  h1 {
+    font-size: 36px;
+    margin: 20px 0;
+  }
+  h2 {
+    font-size: 20px;
+  }
 }
 
 .dark #social .button-icon {

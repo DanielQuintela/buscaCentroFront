@@ -1,30 +1,52 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../hooks/UseAuth'
-import { Eye, EyeOff, Lock, Mail, User, Loader2, ArrowLeft, ShieldCheck } from 'lucide-react'
+import { Eye, EyeOff, Lock, Mail, User, Loader2, ArrowLeft, ShieldCheck, Store } from 'lucide-react'
 import { toast } from 'sonner'
+import type { CreateUserFormData } from '../types/User.types'
 
 export function RegisterPage() {
   const navigate = useNavigate()
-  //TODO: CRIAR A FUNÇÃO DE SINGUP
   const { signUp, loading } = useAuth()
 
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  
+  const [formData, setFormData] = useState<CreateUserFormData>({
+    name: '',
+    email: '',
+    password: '',
+    role: 'USER',
+    status: 'ACTIVE',
+  })
+
+  // Função genérica para atualizar os campos de texto do formulário
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const { name, value } = e.target
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value
+    }))
+  }
+
+  // Função específica para alternar o tipo de conta (Checkbox)
+  function handleRoleToggle(e: React.ChangeEvent<HTMLInputElement>) {
+    setFormData((prev) => ({
+      ...prev,
+      role: e.target.checked ? 'MERCHANT' : 'USER'
+    }))
+  }
 
   async function handleRegister(e: React.FormEvent) {
     e.preventDefault()
 
-    if (password.length < 6) {
+    if (formData.password.length < 6) {
       toast.error('A senha deve ter 6 caracteres ou mais')
       return
     }
 
-    if (password !== confirmPassword) {
+    if (formData.password !== confirmPassword) {
       toast.error('As senhas não coincidem')
       return
     }
@@ -33,9 +55,15 @@ export function RegisterPage() {
 
     try {
       if (signUp) {
-        await signUp({ name, email, password })
+        await signUp({ 
+          name: formData.name, 
+          email: formData.email, 
+          password: formData.password,
+          role: formData.role,
+          status: formData.status
+        })
       } else {
-        throw new Error('Função de cadastro não disponível')
+        throw new Error('Função de registo não disponível')
       }
       
       toast.success('Conta criada com sucesso! 🎉')
@@ -59,7 +87,7 @@ export function RegisterPage() {
       <div className="absolute -bottom-32 -right-32 w-80 h-80 bg-[#51433a]/10 rounded-full blur-3xl pointer-events-none" />
 
       {/* Card Principal */}
-      <div className="relative z-10 w-full max-w-sm sm:max-w-md bg-[#f2e9d9]/85 backdrop-blur-xl p-7 sm:p-8 rounded-[32px] shadow-2xl shadow-[#51433a]/15 border border-white/60">
+      <div className="relative z-10 w-full max-w-sm sm:max-w-md bg-[#f2e9d9]/85 backdrop-blur-xl p-7 sm:p-8 rounded-4xl shadow-2xl shadow-[#51433a]/15 border border-white/60">
         
         {/* Cabeçalho */}
         <div className="mb-6 text-center">
@@ -79,10 +107,11 @@ export function RegisterPage() {
             <User className="absolute left-4 text-[#51433a]/50 h-5 w-5 pointer-events-none" />
             <input 
               type="text"
+              name="name"
               required
               placeholder="Seu nome completo"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={formData.name}
+              onChange={handleChange}
               className="w-full py-3.5 pl-11 pr-4 bg-white/75 text-[#51433a] placeholder:text-[#51433a]/45 rounded-2xl border border-[#51433a]/10 outline-none text-sm font-medium focus:bg-white focus:border-[#b45309] focus:ring-4 focus:ring-[#b45309]/15 transition-all"
             />
           </div>
@@ -92,10 +121,11 @@ export function RegisterPage() {
             <Mail className="absolute left-4 text-[#51433a]/50 h-5 w-5 pointer-events-none" />
             <input 
               type="email"
+              name="email"
               required
               placeholder="Seu e-mail"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={formData.email}
+              onChange={handleChange}
               className="w-full py-3.5 pl-11 pr-4 bg-white/75 text-[#51433a] placeholder:text-[#51433a]/45 rounded-2xl border border-[#51433a]/10 outline-none text-sm font-medium focus:bg-white focus:border-[#b45309] focus:ring-4 focus:ring-[#b45309]/15 transition-all"
             />
           </div>
@@ -105,10 +135,11 @@ export function RegisterPage() {
             <Lock className="absolute left-4 text-[#51433a]/50 h-5 w-5 pointer-events-none" />
             <input 
               type={showPassword ? 'text' : 'password'}
+              name="password"
               required
               placeholder="Crie uma senha"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={formData.password}
+              onChange={handleChange}
               className="w-full py-3.5 pl-11 pr-11 bg-white/75 text-[#51433a] placeholder:text-[#51433a]/45 rounded-2xl border border-[#51433a]/10 outline-none text-sm font-medium focus:bg-white focus:border-[#b45309] focus:ring-4 focus:ring-[#b45309]/15 transition-all"
             />
             <button
@@ -132,6 +163,20 @@ export function RegisterPage() {
               className="w-full py-3.5 pl-11 pr-4 bg-white/75 text-[#51433a] placeholder:text-[#51433a]/45 rounded-2xl border border-[#51433a]/10 outline-none text-sm font-medium focus:bg-white focus:border-[#b45309] focus:ring-4 focus:ring-[#b45309]/15 transition-all"
             />
           </div>
+
+          {/* Checkbox Tipo de Conta (Comerciante) */}
+          <label className="relative flex items-center gap-3 p-3.5 bg-white/40 hover:bg-white/60 border border-[#51433a]/10 rounded-2xl cursor-pointer transition-all group">
+            <input 
+              type="checkbox"
+              checked={formData.role === 'MERCHANT'}
+              onChange={handleRoleToggle}
+              className="w-5 h-5 rounded border-[#51433a]/30 text-[#b45309] focus:ring-[#b45309] focus:ring-2 accent-[#b45309] cursor-pointer"
+            />
+            <div className="flex items-center gap-2">
+              <Store className="h-4 w-4 text-[#51433a]/70 group-hover:text-[#b45309] transition-colors" />
+              <span className="text-sm font-medium text-[#51433a]">Criar conta de Comerciante</span>
+            </div>
+          </label>
 
           {/* Botão de Cadastrar */}
           <button

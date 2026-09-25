@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../hooks/UseAuth'
-import { Eye, EyeOff, Lock, Mail, Store, Loader2, ShieldCheck } from 'lucide-react'
+import { Eye, EyeOff, Lock, Mail, Loader2, ShieldCheck } from 'lucide-react'
 import { toast } from 'sonner'
 
 export function LoginPage() {
@@ -121,7 +121,7 @@ export function LoginPage() {
                 <span>Autenticando...</span>
               </>
             ) : (
-              'Acessar Centro'
+              'Login'
             )}
           </button>
 
@@ -137,29 +137,10 @@ export function LoginPage() {
           {/* Botão de Cadastro (Placeholder) */}
           <button 
             type="button"
-            onClick={() => toast("🚧 Funcionalidade em desenvolvimento")}
+            onClick={() => navigate('/register')}
             className="w-full bg-[#b45309] hover:bg-[#92400e] text-[#f2e9d9] py-3 rounded-2xl font-bold text-xs uppercase tracking-wider shadow-md shadow-[#b45309]/20 active:scale-[0.98] transition-all cursor-pointer"
           >
             Cadastre-se!
-          </button>
-
-          {/* Divisor - Alternativo */}
-          <div className="relative flex items-center pt-1">
-            <div className="flex-1 border-t border-[#51433a]/15" />
-            <span className="px-3 text-[10px] font-black uppercase tracking-widest text-[#51433a]/60">
-              ou
-            </span>
-            <div className="flex-1 border-t border-[#51433a]/15" />
-          </div>
-
-          {/* Botão Comerciante */}
-          <button 
-            type="button"
-            onClick={() => navigate('/comerciante')}
-            className="w-full bg-[#51433a] hover:bg-[#3d322d] text-[#f2e9d9] py-3.5 rounded-2xl font-bold text-sm shadow-md shadow-[#51433a]/25 active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer"
-          >
-            <Store className="h-4 w-4" />
-            <span>Entrar como Comerciante</span>
           </button>
         </form>
       </div>

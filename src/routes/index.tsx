@@ -5,6 +5,7 @@ import { ProtectedRoute } from './protectedRoutes'
 // import { AdminRoute } from './AdminRoutes'
 import { ProfilePage } from '../pages/profilePage'
 import { useThemeSystem } from '../hooks/ThemeSistem'
+import { CreateUserPage } from '../pages/createUserPage'
 
 
 
@@ -22,14 +23,10 @@ export function AppRoutes() {
             </ProtectedRoute>
           }
         />
-         {/* <Route
-          path="/user/new"
-          element={
-            <AdminRoute>
-              <CreateUserPage />
-            </AdminRoute>
-          }
-        /> */}
+         <Route
+          path="/register"
+          element={<CreateUserPage />}
+        />
         {/* <Route
           path="/users"
           element={

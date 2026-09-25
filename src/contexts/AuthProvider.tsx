@@ -3,6 +3,7 @@ import type { LoginData } from "../types/Login.types"
 import type { AuthResponse, User } from "../types/Auth.types"
 import { api } from "../lib/Axios"
 import { AuthContext } from "./AuthContext"
+import type { CreateUserFormData } from "../types/User.types"
 
 
 export function AuthProvider({children}: {children: React.ReactNode}) {
@@ -33,11 +34,12 @@ export function AuthProvider({children}: {children: React.ReactNode}) {
     setUser(userResponse.data)
   }
 
-  async function signUp(data: { name: string, email: string, password: string }) {
-    const response = await api.post<AuthResponse>(
-      '/auth/register',
-      data
-    )
+  async function signUp(data: CreateUserFormData) {
+    const response = await api.post(
+            '/auth/register', data
+        )
+        return response.data
+  }
 
   function logout() {
     localStorage.removeItem('@token')
@@ -77,6 +79,7 @@ export function AuthProvider({children}: {children: React.ReactNode}) {
         signIn,
         logout,
         loadUser,
+        signUp,
       }}
     >
       {children}

@@ -5,7 +5,7 @@ import { Eye, EyeOff, Lock, Mail, User, Loader2, ArrowLeft, ShieldCheck, Store }
 import { toast } from 'sonner'
 import type { CreateUserFormData } from '../types/User.types'
 
-export function RegisterPage() {
+export function CreateUserPage() {
   const navigate = useNavigate()
   const { signUp, loading } = useAuth()
 
@@ -206,7 +206,7 @@ export function RegisterPage() {
           {/* Botão Voltar para Login */}
           <button 
             type="button"
-            onClick={() => navigate('/login')}
+            onClick={() => navigate('/')}
             className="w-full bg-transparent border-2 border-[#51433a]/10 hover:border-[#51433a]/30 hover:bg-white/40 text-[#51433a] py-3.5 rounded-2xl font-bold text-sm active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer"
           >
             <ArrowLeft className="h-4 w-4" />

@@ -36,9 +36,10 @@ export function AuthProvider({children}: {children: React.ReactNode}) {
 
   async function signUp(data: CreateUserFormData) {
     const response = await api.post(
-            '/auth/register', data
-        )
-        return response.data
+      '/auth/register', 
+      data
+    )
+      return response.data
   }
 
   function logout() {

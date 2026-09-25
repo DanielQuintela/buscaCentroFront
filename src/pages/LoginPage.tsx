@@ -138,7 +138,7 @@ export function LoginPage() {
           <button 
             type="button"
             onClick={() => navigate('/register')}
-            className="w-full bg-[#b45309] hover:bg-[#92400e] text-[#f2e9d9] py-3 rounded-2xl font-bold text-xs uppercase tracking-wider shadow-md shadow-[#b45309]/20 active:scale-[0.98] transition-all cursor-pointer"
+            className="w-full bg-[#51433a] hover:bg-[#3d322d] text-[#f2e9d9] py-3.5 rounded-2xl font-bold text-sm shadow-md shadow-[#51433a]/25 active:scale-[0.98] transition-all cursor-pointer"
           >
             Cadastre-se!
           </button>

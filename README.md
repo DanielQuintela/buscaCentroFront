@@ -109,7 +109,7 @@
 
   O projeto está em desenvolvimento. A fundação de autenticação e gerenciamento de perfil está disponível, enquanto os módulos de mapa, busca, rotas, pontos e catálogo de comerciantes continuam em evolução.
 
-
+##
 © 2026 Daniel Quintela. Todos os direitos reservados.
 
 O uso, cópia, modificação ou redistribuição deste código depende de autorização expressa do autor.

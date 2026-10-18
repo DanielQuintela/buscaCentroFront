@@ -1,27 +1,21 @@
-import { Sidebar } from '../sidebar'
+import { Navbar } from '../navbar'
 import { Header } from '../header'
-import { useState } from 'react'
 
 interface MainLayoutProps {
   children: React.ReactNode
 }
 
 export function MainLayout({ children }: MainLayoutProps) {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
-
+  /* ATENÇÃO: pb-24 garante que a bottom nav bar flutuante não vai sobrepor/esconder o conteúdo do final da página */
   return (
-    <div className="min-h-screen flex bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-200">
-      <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-200 pb-24">
+      <Header />
 
-      <div className="flex-1 flex flex-col min-w-0">
-        {/* Passamos a função de abrir para o Header */}
-        <Header onOpenSidebar={() => setIsSidebarOpen(true)} />
+      <main className="flex-1 p-4 sm:p-8 w-full max-w-7xl mx-auto">
+        {children}
+      </main>
 
-        {/* Container de Conteúdo centralizado e limpo */}
-        <main className="p-8 max-w-400 w-full mx-auto">
-          {children}
-        </main>
-      </div>
+      <Navbar />
     </div>
   )
 }

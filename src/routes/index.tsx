@@ -6,6 +6,8 @@ import { ProtectedRoute } from './protectedRoutes'
 import { ProfilePage } from '../pages/profilePage'
 import { useThemeSystem } from '../hooks/ThemeSistem'
 import { CreateUserPage } from '../pages/createUserPage'
+import { RedirectPage } from './redirect'
+import { MapPage } from '../pages/mapPage'
 
 
 
@@ -50,6 +52,18 @@ export function AppRoutes() {
               <ProfilePage />
             </ProtectedRoute>
           }
+        />
+        <Route
+          path="/mapa"
+          element={
+            <ProtectedRoute>
+              <MapPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="*"
+          element={<RedirectPage />}
         />
       </Routes>
     </BrowserRouter>

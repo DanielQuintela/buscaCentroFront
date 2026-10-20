@@ -15,9 +15,10 @@ export function Header() {
     <header className="h-16 bg-white dark:bg-slate-900/50 border-b border-slate-200 dark:border-slate-800/80 px-4 sm:px-8 flex items-center justify-between backdrop-blur-sm sticky top-0 z-40">
       
       <div className="flex items-center gap-3">
-        <h2 className="font-semibold text-slate-700 dark:text-slate-200 tracking-wide hidden sm:block">
+        {/* TODO: CRIAR LOGO AQUI */}
+        {/* <h2 className="font-semibold text-slate-700 dark:text-slate-200 tracking-wide hidden sm:block">
           {role === "Administrador" ? "Painel Administrativo" : "Painel do Usuário"}
-        </h2>
+        </h2> */}
       </div>
 
       <div className="flex items-center gap-3 sm:gap-4 select-none">

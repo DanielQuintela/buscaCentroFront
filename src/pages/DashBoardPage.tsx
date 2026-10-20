@@ -1,9 +1,12 @@
+import { MainLayout } from "../components/layout/mainDashboardLayout"
 
 export function DashboardPage() {
   return (
-    <div>
+    <MainLayout>
+       <div>
       <h1>Dashboard</h1>
       
     </div>
+    </MainLayout>
   )
 }
